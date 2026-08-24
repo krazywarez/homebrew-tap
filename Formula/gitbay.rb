@@ -3,7 +3,7 @@ class Gitbay < Formula
   homepage "https://gitbay.org"
   url "https://gitbay.org/krz/gitbay.git",
       tag:      "v0.1.0",
-      revision: "861b98f2f9ab341e95fd7b4a25fea9d1a7669513"
+      revision: "2e2eeb13b3191e7642b29bc567b1077e11ed9a78"
   license "ISC"
   head "https://gitbay.org/krz/gitbay.git", branch: "main"
 
