@@ -2,9 +2,9 @@ class Gitbay < Formula
   desc "CLI for gitbay, the CLI-first git forge"
   homepage "https://gitbay.org"
   url "https://gitbay.org/krz/gitbay.git",
-      tag:      "v0.2.0",
-      revision: "b937a769f31481aa5f2e4e70711dea53e22ce6da"
-  license "ISC"
+      tag:      "v0.3.0",
+      revision: "6b01ef3788b21e3a4c027a2afe7e7a5bda9ca000"
+  license "0BSD"
   head "https://gitbay.org/krz/gitbay.git", branch: "main"
 
   depends_on "go" => :build
