@@ -2,8 +2,8 @@ class AmbientCompanions < Formula
   desc "Ambient system companions over one privacy-preserving signal daemon"
   homepage "https://gitbay.org/krz/ambient-companions"
   url "https://gitbay.org/krz/ambient-companions.git",
-      tag:      "v1.0.0",
-      revision: "106c62e2f9a644811a6f9c261331a70b76139497"
+      tag:      "v1.1.0",
+      revision: "7bf3941d56f48fc226a46d7b2f26f05b512c321b"
   license "0BSD"
   head "https://gitbay.org/krz/ambient-companions.git", branch: "main"
 
