@@ -2,8 +2,8 @@ class AmbientCompanions < Formula
   desc "Ambient system companions over one privacy-preserving signal daemon"
   homepage "https://gitbay.org/krz/ambient-companions"
   url "https://gitbay.org/krz/ambient-companions.git",
-      tag:      "v1.1.0",
-      revision: "7bf3941d56f48fc226a46d7b2f26f05b512c321b"
+      tag:      "v1.2.0",
+      revision: "5358b7a0828e4b77a1b7e2eb438b14449ad1aa8e"
   license "0BSD"
   head "https://gitbay.org/krz/ambient-companions.git", branch: "main"
 
@@ -16,6 +16,7 @@ class AmbientCompanions < Formula
     system "cargo", "install", *std_cargo_args(path: "crates/signald")
     system "cargo", "install", *std_cargo_args(path: "crates/terminal-garden")
     system "cargo", "install", *std_cargo_args(path: "crates/terminal-pet")
+    system "cargo", "install", *std_cargo_args(path: "crates/pet-life")
 
     # The IOKit collector runs out of process as a child of signald.
     # --disable-sandbox: SwiftPM sandboxes its own manifest compile, and that
@@ -25,6 +26,18 @@ class AmbientCompanions < Formula
                     "--package-path", "macos-collector",
                     "--scratch-path", buildpath/"swift-build"
     bin.install buildpath/"swift-build/release/macos-collector"
+
+    # The menu-bar face. SwiftPM cannot emit a .app, so the repo's own script
+    # assembles the bundle; installing it into the prefix rather than shipping
+    # a cask keeps this build-from-source, which also means Gatekeeper never
+    # quarantines it.
+    system "swift", "build", "-c", "release", "--disable-sandbox",
+                    "--package-path", "menubar-pet",
+                    "--scratch-path", buildpath/"menubar-build"
+    system "menubar-pet/scripts/bundle.sh",
+           buildpath/"menubar-build/release/menubar-pet", prefix
+    # pet-life sits beside the app binary so the bundle finds it without PATH.
+    (prefix/"menubar-pet.app/Contents/MacOS").install_symlink bin/"pet-life"
 
     # Sourced from the user's .zshrc; see the README install section.
     pkgshare.install "shell-hooks/signald-hooks.zsh"
@@ -52,6 +65,11 @@ class AmbientCompanions < Formula
 
       Then source the terminal collector hooks from your .zshrc:
         source "#{opt_pkgshare}/signald-hooks.zsh"
+
+      The menu-bar pet is an app, not a service. Launch it with:
+        open "#{opt_prefix}/menubar-pet.app"
+      and add it under System Settings > General > Login Items to keep it.
+      It has one life: neglect it for a week and it dies for good.
     EOS
   end
 
@@ -59,6 +77,12 @@ class AmbientCompanions < Formula
     assert_match version.to_s, shell_output("#{bin}/signald --version")
     assert_match version.to_s, shell_output("#{bin}/terminal-garden --version")
     assert_match version.to_s, shell_output("#{bin}/terminal-pet --version")
+    assert_match version.to_s, shell_output("#{bin}/pet-life --version")
+    # The app is only an app if the bundle is intact.
+    assert_path_exists prefix/"menubar-pet.app/Contents/MacOS/menubar-pet"
+    assert_match "true",
+                 shell_output("plutil -extract LSUIElement raw " \
+                              "#{prefix}/menubar-pet.app/Contents/Info.plist")
     # Unknown options exit 2 rather than being taken for a repository path.
     shell_output("#{bin}/signald --nonexistent-option 2>&1", 2)
     # One real IOKit read, no root. --once writes raw wire frames to stdout and
