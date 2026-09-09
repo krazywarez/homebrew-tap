@@ -34,6 +34,7 @@ class GitbayRunner < Formula
   end
 
   test do
-    assert_match "gitbay-runner", shell_output("#{bin}/gitbay-runner -version")
+    # -version prints the commit the binary was built from.
+    assert_match(/\A[0-9a-f]{12}/, shell_output("#{bin}/gitbay-runner -version"))
   end
 end
