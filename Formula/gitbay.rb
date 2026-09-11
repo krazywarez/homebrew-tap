@@ -2,8 +2,8 @@ class Gitbay < Formula
   desc "CLI for gitbay, the CLI-first git forge"
   homepage "https://gitbay.org"
   url "https://gitbay.org/krz/gitbay.git",
-      tag:      "v1.18.0",
-      revision: "e91fdfe0cc2f9bfdcf99bf1a316d219bed8e2ebf"
+      tag:      "v1.18.1",
+      revision: "3c0c20da787d91bcad19aec3b5e1b5c4ac5a4745"
   license "0BSD"
   head "https://gitbay.org/krz/gitbay.git", branch: "main"
 
