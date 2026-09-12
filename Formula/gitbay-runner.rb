@@ -2,8 +2,8 @@ class GitbayRunner < Formula
   desc "CI runner for gitbay: builds the repositories you attach it to"
   homepage "https://gitbay.org/krz/gitbay"
   url "https://gitbay.org/krz/gitbay.git",
-      tag:      "v1.20.0",
-      revision: "f3f7422f62a73bb798f9cf9c5f4c344212a27f60"
+      tag:      "v1.20.1",
+      revision: "3e09d5870a4feae506c6b005792f2858f4b83d0e"
   license "0BSD"
   head "https://gitbay.org/krz/gitbay.git", branch: "main"
 
