@@ -3,8 +3,8 @@
 #   brew tap krz/tap https://gitbay.org/krz/homebrew-tap.git && brew install --cask orgstar
 
 cask "orgstar" do
-  version "0.1.0"
-  sha256 "89b727e3c8445c28e5bfce63225ecbdfeef2d7f7a2b2367a736a515832d2c839"
+  version "0.2.0"
+  sha256 "12f7de99d00a3f1bad13eacfc534f5ff863aaf61886cdd9eb969fffc5c28d654"
 
   url "https://gitbay.org/krz/orgstar/releases/download/v#{version}/orgstar-#{version}.dmg"
   name "orgstar"
