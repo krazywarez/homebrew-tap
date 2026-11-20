@@ -3,14 +3,14 @@
 #   brew tap krz/tap https://gitbay.org/krz/homebrew-tap.git && brew install --cask orgstar
 
 cask "orgstar" do
-  version "0.9.2"
-  sha256 "6bdaa4dbf3b8c4857988634977fbd20b1fdc37ad591034ceba8dde8da3bdcd5a"
+  version "1.1.0"
+  sha256 "8466ba74c86d68346f5ebb8ab6876fed848eba39385f8f8c73f4fa8378c38215"
 
-  url "https://gitbay.org/krz/orgstar/releases/download/v#{version}/orgstar-#{version}.dmg"
+  url "https://files.krz.sh/orgstar/orgstar-#{version}.dmg"
   name "orgstar"
   desc "Native org-mode editor and agenda"
   auto_updates true
-  homepage "https://gitbay.org/krz/orgstar"
+  homepage "https://krz.sh/apps/orgstar/"
 
   depends_on macos: :tahoe
 
